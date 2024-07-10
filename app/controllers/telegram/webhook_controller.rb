@@ -1,12 +1,18 @@
 class Telegram::WebhookController < Telegram::Bot::UpdatesController
-  def message(message)
-    # store_message(message['text'])
+  def stats!
+    respond_with :message, text: "это команда будет показывать количество сообщений"
   end
 
-  def start!(word = nil, *other_words)
-    response = from ? "Hello #{from['username']}!" : 'Hi there!'
+  def userstats!
+    respond_with :message, text: "Это команда будет показывать сообщения участника"
+  end
 
-    respond_with :message, text: response
+  def start!(*)
+    respond_with :message, text: "Начинаю считать сообщения"
+  end
+
+  def help!
+    respond_with :message, text: "Здесь будет справка по командам"
   end
 
   private

@@ -1,0 +1,14 @@
+<p style="color: green"><%= notice %></p>
+
+<h1>Tg messages</h1>
+
+<div id="tg_messages">
+  <% @tg_messages.each do |tg_message| %>
+    <%= render tg_message %>
+    <p>
+      <%= link_to "Show this tg message", tg_message %>
+    </p>
+  <% end %>
+</div>
+
+<%= link_to "New tg message", new_tg_message_path %>

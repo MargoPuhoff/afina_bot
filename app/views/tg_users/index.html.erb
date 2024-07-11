@@ -1,0 +1,14 @@
+<p style="color: green"><%= notice %></p>
+
+<h1>Tg users</h1>
+
+<div id="tg_users">
+  <% @tg_users.each do |tg_user| %>
+    <%= render tg_user %>
+    <p>
+      <%= link_to "Show this tg user", tg_user %>
+    </p>
+  <% end %>
+</div>
+
+<%= link_to "New tg user", new_tg_user_path %>

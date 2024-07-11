@@ -8,8 +8,6 @@ module Telegram
              else
                chat['title']
              end
-
-      chat_id = TgChat.find_or_initialize_by(tg_id: chat['id'])
       chat_id.name = name
       chat_id.save!
 

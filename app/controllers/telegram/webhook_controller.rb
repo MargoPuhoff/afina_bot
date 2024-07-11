@@ -1,15 +1,27 @@
 module Telegram
   class WebhookController < Telegram::Bot::UpdatesController
+    def start!(*)
+      chat_id = TgChat.find_or_create_by(tg_id: chat['id'])
+      user_id = from['id']
+      name = if chat['type'] == 'private'
+               chat['username']
+             else
+               chat['title']
+             end
+
+      chat_id = TgChat.find_or_initialize_by(tg_id: chat['id'])
+      chat_id.name = name
+      chat_id.save!
+
+      respond_with :message, text: "Начинаю считать сообщения"
+    end
+
     def stats!
       respond_with :message, text: "это команда будет показывать количество сообщений"
     end
 
     def userstats!
       respond_with :message, text: "Это команда будет показывать сообщения участника"
-    end
-
-    def start!(*)
-      respond_with :message, text: "Начинаю считать сообщения"
     end
 
     def help!

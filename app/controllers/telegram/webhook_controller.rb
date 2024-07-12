@@ -34,7 +34,8 @@ module Telegram
     end
 
     def help!
-      respond_with :message, text: "Здесь будет справка по командам"
+      respond_with :message,
+                   text: "/start запускает подсчет сообщений\n/stats показывает общее количество сообщений в чате\n/userstats @username показывает количество сообщний отдельного учатника чата"
     end
 
     def message(message)

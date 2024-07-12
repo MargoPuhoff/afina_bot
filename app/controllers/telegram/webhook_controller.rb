@@ -8,6 +8,7 @@ module Telegram
                chat['title']
              end
       chat_id.name = name
+      chat_id.status = true
       chat_id.save!
 
       respond_with :message, text: "Начинаю считать сообщения"
@@ -39,8 +40,10 @@ module Telegram
         tg_id = message_params['message_id']
         tg_chat_id = message_params.dig('chat', 'id')
         tg_user_id = message_params.dig('from', 'id')
+        tg_chat = TgChat.find_by_tg_id(tg_chat_id)
 
-        if TgChat.find_by_tg_id(tg_chat_id)
+        if tg_chat.status == true
+          puts tg_chat.status
           if tg_id && tg_user_id
             user = TgUser.find_or_create_by(tg_id: tg_user_id) do |u|
               u.tg_name = message_params.dig('from', 'username')

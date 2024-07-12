@@ -2,7 +2,6 @@ module Telegram
   class WebhookController < Telegram::Bot::UpdatesController
     def start!(*)
       chat_id = TgChat.find_or_create_by(tg_id: chat['id'])
-      user_id = from['id']
       name = if chat['type'] == 'private'
                chat['username']
              else
@@ -26,13 +25,35 @@ module Telegram
       respond_with :message, text: "Здесь будет справка по командам"
     end
 
+    def message(message)
+      Rails.logger.info("Received message: #{message.inspect}")
+      process_message(message)
+
+      # render plain: 'ok'
+    end
+
     private
 
-    def locale_for_update
-      if from
-        # locale for user
-      elsif chat
-        # locale for chat
+    def process_message(message_params)
+      if message_params
+        tg_id = message_params['message_id']
+        tg_chat_id = message_params.dig('chat', 'id')
+        tg_user_id = message_params.dig('from', 'id')
+
+        if TgChat.find_by_tg_id(tg_chat_id)
+          if tg_id && tg_user_id
+            user = TgUser.find_or_create_by(tg_id: tg_user_id) do |u|
+              u.tg_name = message_params.dig('from', 'username')
+              u.name = message_params.dig('from', 'first_name')
+            end
+            TgMessage.create!(tg_id:, tg_chat_id:, tg_user_id: user.tg_id)
+          else
+            Rails.logger.error("Нет параметра: #{message_params.inspect}")
+          end
+        end
+
+      else
+        Rails.logger.error("message_params is nil")
       end
     end
   end

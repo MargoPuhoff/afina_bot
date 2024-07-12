@@ -14,8 +14,9 @@ module Telegram
       respond_with :message, text: "Начинаю считать сообщения"
     end
 
-    def stats!
-      respond_with :message, text: "это команда будет показывать количество сообщений"
+    def stats!(*)
+      count_message = TgMessage.where(tg_chat_id: chat['id']).count
+      respond_with :message, text: "В этом чате #{count_message} сообщений"
     end
 
     def userstats!
@@ -27,7 +28,6 @@ module Telegram
     end
 
     def message(message)
-      Rails.logger.info("Received message: #{message.inspect}")
       process_message(message)
 
       # render plain: 'ok'

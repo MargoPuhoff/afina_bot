@@ -17,7 +17,7 @@ class TgUsersControllerTest < ActionDispatch::IntegrationTest
 
   test "should create tg_user" do
     assert_difference("TgUser.count") do
-      post tg_users_url, params: { tg_user: {  } }
+      post tg_users_url, params: { tg_user: {} }
     end
 
     assert_redirected_to tg_user_url(TgUser.last)
@@ -34,7 +34,7 @@ class TgUsersControllerTest < ActionDispatch::IntegrationTest
   end
 
   test "should update tg_user" do
-    patch tg_user_url(@tg_user), params: { tg_user: {  } }
+    patch tg_user_url(@tg_user), params: { tg_user: {} }
     assert_redirected_to tg_user_url(@tg_user)
   end
 

@@ -1,5 +1,5 @@
 class TgUsersController < ApplicationController
-  before_action :set_tg_user, only: %i[ show edit update destroy ]
+  before_action :set_tg_user, only: %i[show edit update destroy]
 
   # GET /tg_users or /tg_users.json
   def index
@@ -7,8 +7,7 @@ class TgUsersController < ApplicationController
   end
 
   # GET /tg_users/1 or /tg_users/1.json
-  def show
-  end
+  def show; end
 
   # GET /tg_users/new
   def new
@@ -16,8 +15,7 @@ class TgUsersController < ApplicationController
   end
 
   # GET /tg_users/1/edit
-  def edit
-  end
+  def edit; end
 
   # POST /tg_users or /tg_users.json
   def create
@@ -58,13 +56,14 @@ class TgUsersController < ApplicationController
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_tg_user
-      @tg_user = TgUser.find(params[:id])
-    end
 
-    # Only allow a list of trusted parameters through.
-    def tg_user_params
-      params.fetch(:tg_user, {})
-    end
+  # Use callbacks to share common setup or constraints between actions.
+  def set_tg_user
+    @tg_user = TgUser.find(params[:id])
+  end
+
+  # Only allow a list of trusted parameters through.
+  def tg_user_params
+    params.fetch(:tg_user, {})
+  end
 end

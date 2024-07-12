@@ -17,7 +17,7 @@ class TgChatsControllerTest < ActionDispatch::IntegrationTest
 
   test "should create tg_chat" do
     assert_difference("TgChat.count") do
-      post tg_chats_url, params: { tg_chat: {  } }
+      post tg_chats_url, params: { tg_chat: {} }
     end
 
     assert_redirected_to tg_chat_url(TgChat.last)
@@ -34,7 +34,7 @@ class TgChatsControllerTest < ActionDispatch::IntegrationTest
   end
 
   test "should update tg_chat" do
-    patch tg_chat_url(@tg_chat), params: { tg_chat: {  } }
+    patch tg_chat_url(@tg_chat), params: { tg_chat: {} }
     assert_redirected_to tg_chat_url(@tg_chat)
   end
 

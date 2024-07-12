@@ -1,5 +1,5 @@
 class TgMessagesController < ApplicationController
-  before_action :set_tg_message, only: %i[ show edit update destroy ]
+  before_action :set_tg_message, only: %i[show edit update destroy]
 
   # GET /tg_messages or /tg_messages.json
   def index
@@ -7,8 +7,7 @@ class TgMessagesController < ApplicationController
   end
 
   # GET /tg_messages/1 or /tg_messages/1.json
-  def show
-  end
+  def show; end
 
   # GET /tg_messages/new
   def new
@@ -16,8 +15,7 @@ class TgMessagesController < ApplicationController
   end
 
   # GET /tg_messages/1/edit
-  def edit
-  end
+  def edit; end
 
   # POST /tg_messages or /tg_messages.json
   def create
@@ -58,13 +56,14 @@ class TgMessagesController < ApplicationController
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_tg_message
-      @tg_message = TgMessage.find(params[:id])
-    end
 
-    # Only allow a list of trusted parameters through.
-    def tg_message_params
-      params.fetch(:tg_message, {})
-    end
+  # Use callbacks to share common setup or constraints between actions.
+  def set_tg_message
+    @tg_message = TgMessage.find(params[:id])
+  end
+
+  # Only allow a list of trusted parameters through.
+  def tg_message_params
+    params.fetch(:tg_message, {})
+  end
 end

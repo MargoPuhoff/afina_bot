@@ -17,7 +17,7 @@ class TgMessagesControllerTest < ActionDispatch::IntegrationTest
 
   test "should create tg_message" do
     assert_difference("TgMessage.count") do
-      post tg_messages_url, params: { tg_message: {  } }
+      post tg_messages_url, params: { tg_message: {} }
     end
 
     assert_redirected_to tg_message_url(TgMessage.last)
@@ -34,7 +34,7 @@ class TgMessagesControllerTest < ActionDispatch::IntegrationTest
   end
 
   test "should update tg_message" do
-    patch tg_message_url(@tg_message), params: { tg_message: {  } }
+    patch tg_message_url(@tg_message), params: { tg_message: {} }
     assert_redirected_to tg_message_url(@tg_message)
   end
 

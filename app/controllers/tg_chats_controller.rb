@@ -1,5 +1,5 @@
 class TgChatsController < ApplicationController
-  before_action :set_tg_chat, only: %i[ show edit update destroy ]
+  before_action :set_tg_chat, only: %i[show edit update destroy]
 
   # GET /tg_chats or /tg_chats.json
   def index
@@ -7,8 +7,7 @@ class TgChatsController < ApplicationController
   end
 
   # GET /tg_chats/1 or /tg_chats/1.json
-  def show
-  end
+  def show; end
 
   # GET /tg_chats/new
   def new
@@ -16,8 +15,7 @@ class TgChatsController < ApplicationController
   end
 
   # GET /tg_chats/1/edit
-  def edit
-  end
+  def edit; end
 
   # POST /tg_chats or /tg_chats.json
   def create
@@ -58,13 +56,14 @@ class TgChatsController < ApplicationController
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_tg_chat
-      @tg_chat = TgChat.find(params[:id])
-    end
 
-    # Only allow a list of trusted parameters through.
-    def tg_chat_params
-      params.fetch(:tg_chat, {})
-    end
+  # Use callbacks to share common setup or constraints between actions.
+  def set_tg_chat
+    @tg_chat = TgChat.find(params[:id])
+  end
+
+  # Only allow a list of trusted parameters through.
+  def tg_chat_params
+    params.fetch(:tg_chat, {})
+  end
 end

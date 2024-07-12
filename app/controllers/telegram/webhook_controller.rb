@@ -19,8 +19,18 @@ module Telegram
       respond_with :message, text: "В этом чате #{count_message} сообщений"
     end
 
-    def userstats!
-      respond_with :message, text: "Это команда будет показывать сообщения участника"
+    def userstats!(*args)
+      respond_with :message, text: "Укажите имя пользователя" if args.empty?
+
+      username = args[0].delete_prefix('@')
+      user = TgUser.find_by(tg_name: username)
+
+      if user
+        user_message_count = TgMessage.where(tg_chat_id: chat['id'], tg_user_id: user.tg_id).count
+        respond_with :message, text: "#{user.name} отправил #{user_message_count} сообщений"
+      else
+        respond_with :message, text: "#{user.name} еще ничего не отправил"
+      end
     end
 
     def help!

@@ -7,6 +7,7 @@ gem "rails", "~> 7.1.3", ">= 7.1.3.4"
 gem 'telegram-bot'
 gem 'rubocop', '~> 1.65', require: false
 gem 'devise'
+gem 'slim-rails'
 
 # The original asset pipeline for Rails [https://github.com/rails/sprockets-rails]
 gem "sprockets-rails"

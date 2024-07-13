@@ -4,7 +4,7 @@ Rails.application.routes.draw do
   resources :tg_messages
   resources :tg_chats
 
-  root 'tg_chat#index'
+  root 'tg_chats#index'
 
   telegram_webhook Telegram::WebhookController
   # post '/webhooks', to: 'webhooks#callback'

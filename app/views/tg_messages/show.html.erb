@@ -1,0 +1,10 @@
+<p style="color: green"><%= notice %></p>
+
+<%= render @tg_message %>
+
+<div>
+  <%= link_to "Edit this tg message", edit_tg_message_path(@tg_message) %> |
+  <%= link_to "Back to tg messages", tg_messages_path %>
+
+  <%= button_to "Destroy this tg message", @tg_message, method: :delete %>
+</div>

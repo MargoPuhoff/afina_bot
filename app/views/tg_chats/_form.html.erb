@@ -1,0 +1,17 @@
+<%= form_with(model: tg_chat) do |form| %>
+  <% if tg_chat.errors.any? %>
+    <div style="color: red">
+      <h2><%= pluralize(tg_chat.errors.count, "error") %> prohibited this tg_chat from being saved:</h2>
+
+      <ul>
+        <% tg_chat.errors.each do |error| %>
+          <li><%= error.full_message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div>
+    <%= form.submit %>
+  </div>
+<% end %>

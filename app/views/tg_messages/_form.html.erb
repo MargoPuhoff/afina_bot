@@ -1,0 +1,17 @@
+<%= form_with(model: tg_message) do |form| %>
+  <% if tg_message.errors.any? %>
+    <div style="color: red">
+      <h2><%= pluralize(tg_message.errors.count, "error") %> prohibited this tg_message from being saved:</h2>
+
+      <ul>
+        <% tg_message.errors.each do |error| %>
+          <li><%= error.full_message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div>
+    <%= form.submit %>
+  </div>
+<% end %>

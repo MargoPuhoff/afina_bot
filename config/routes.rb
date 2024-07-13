@@ -3,7 +3,7 @@ Rails.application.routes.draw do
   resources :tg_messages
   resources :tg_chats
 
-  get "up" => "rails/health#show", as: :rails_health_check
+  root 'tg_chat#index'
 
   telegram_webhook Telegram::WebhookController
   # post '/webhooks', to: 'webhooks#callback'

@@ -1,6 +1,12 @@
-p class="underline"
-  | Бот для подсчета сообщений в чатах
-
-/ <p class="underline">
-/   Бот для подсчета сообщений в чатах
-/ </p>
+header class="my-5 mx-7 flex items-center"
+  div
+    = image_tag "logo.svg"
+  div class="pl-6"
+    p class="font-thin"
+      | Бот для подсчета сообщений в чатах
+    h2 class="font-bold text-4xl"
+      | Афина
+  div class="ml-auto flex"
+    p class="pr-12 text-xl font-light	 text-zinc-600" User name
+    div class="cursor-pointer"
+      = image_tag "logout.svg"

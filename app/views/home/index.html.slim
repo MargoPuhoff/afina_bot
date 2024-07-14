@@ -8,6 +8,7 @@ header class="my-5 mx-7 pb-2.5 flex items-center"
       | Афина
   div class="ml-auto flex"
     p class="pr-12 text-xl font-light	 text-zinc-600" User name
+      / = @user.name
     div class="cursor-pointer"
       = image_tag "logout.svg"
 
@@ -23,8 +24,14 @@ main class="p-2.5	bg-neutral-300"
     label for="option-2" class="cursor-pointer"
       span class="px-14" Настройки
 
-  div id="analytics" class="hidden"
-    | Этот бот автоматически собирает и анализирует данные о сообщениях в чате с компаниями-клиентами. Он предоставляет администраторам ценную информацию о количестве отправленных сообщений, активности пользователей и другую статистику
+  div id="analytics" class="mx-8 hidden"
+    div class="mt-12 p-10 border-2 rounded-2xl border-black bg-white"
+      | Этот бот автоматически собирает и анализирует данные о сообщениях в чате с компаниями-клиентами. Он предоставляет администраторам ценную информацию о количестве отправленных сообщений, активности пользователей и другую статистику
+    div class="mt-12 mb-5 border rounded-lg border-black bg-white"
+      h3 class="p-6 text-2xl font-medium" Аналитика
+
+    / div
+    /  = render "tg_chats/tg_chat"
 
   div id="settings" class="hidden"
     | Здесть настройки

@@ -13,3 +13,14 @@
  *= require_tree .
  *= require_self
  */
+
+/* Добавь кастомный класс для радиокнопки */
+input[type="radio"]:checked + label > span {
+  padding: .5rem 3rem;
+  font-size: 1.125rem;
+  font-weight: 700;
+  border: 2px solid black;
+  border-radius: 8px;
+  color: white;
+  background: black;
+}

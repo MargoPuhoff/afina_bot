@@ -1,4 +1,4 @@
-header class="my-5 mx-7 flex items-center"
+header class="my-5 mx-7 pb-2.5 flex items-center"
   div
     = image_tag "logo.svg"
   div class="pl-6"
@@ -10,3 +10,23 @@ header class="my-5 mx-7 flex items-center"
     p class="pr-12 text-xl font-light	 text-zinc-600" User name
     div class="cursor-pointer"
       = image_tag "logout.svg"
+
+main class="p-2.5	bg-neutral-300"
+
+  div class="mt-5 mx-8 py-1.5 w-96 font-medium border-2 rounded-lg border-gray-400 bg-white"
+
+    input type="radio" name="select" id="option-1" checked="checked" class="hidden"
+    label for="option-1" class="cursor-pointer"
+      span class="py-2 px-14" Аналитика
+
+    input type="radio" name="select" id="option-2" class="hidden"
+    label for="option-2" class="cursor-pointer"
+      span class="px-14" Настройки
+
+  div id="analytics" class="hidden"
+    | Этот бот автоматически собирает и анализирует данные о сообщениях в чате с компаниями-клиентами. Он предоставляет администраторам ценную информацию о количестве отправленных сообщений, активности пользователей и другую статистику
+
+  div id="settings" class="hidden"
+    | Здесть настройки
+
+= javascript_include_tag 'home'

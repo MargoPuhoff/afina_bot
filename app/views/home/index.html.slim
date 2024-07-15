@@ -7,9 +7,9 @@ header class="my-5 mx-7 pb-2.5 flex items-center"
     h2 class="font-bold text-4xl"
       | Афина
   div class="ml-auto flex"
-    p class="pr-12 text-xl font-light	 text-zinc-600" User name
+    p class="pr-12 text-xl font-light	 text-zinc-600" = session[:username]
     div class="cursor-pointer"
-      = image_tag "logout.svg"
+      = button_to image_tag("logout.svg"), logout_path, method: :delete
 
 main class="p-2.5	bg-neutral-300"
 

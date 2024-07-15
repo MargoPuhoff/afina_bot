@@ -1,0 +1,38 @@
+header class="my-5 mx-7 pb-2.5 flex items-center"
+  div
+    = image_tag "logo.svg"
+  div class="pl-6"
+    p class="font-thin"
+      | Бот для подсчета сообщений в чатах
+    h2 class="font-bold text-4xl"
+      | Афина
+  div class="ml-auto flex"
+    p class="pr-12 text-xl font-light	 text-zinc-600" = session[:username]
+    div class="cursor-pointer"
+      = button_to image_tag("logout.svg"), logout_path, method: :delete
+
+main class="p-2.5	bg-neutral-300"
+
+  div class="mt-5 mx-8 py-1.5 w-96 font-medium border-2 rounded-lg border-gray-400 bg-white"
+
+    input type="radio" name="select" id="option-1" checked="checked" class="hidden"
+    label for="option-1" class="cursor-pointer"
+      span class="py-2 px-14" Аналитика
+
+    input type="radio" name="select" id="option-2" class="hidden"
+    label for="option-2" class="cursor-pointer"
+      span class="px-14" Настройки
+
+  div id="analytics" class="mx-8 hidden"
+    div class="mt-12 p-10 border-2 rounded-2xl border-black bg-white"
+      | Этот бот автоматически собирает и анализирует данные о сообщениях в чате с компаниями-клиентами. Он предоставляет администраторам ценную информацию о количестве отправленных сообщений, активности пользователей и другую статистику
+    div class="mt-12 mb-5 border rounded-lg border-black bg-white"
+      h3 class="p-6 text-2xl font-medium" Аналитика
+
+    / div
+    /  = render "tg_chats/tg_chat"
+
+  div id="settings" class="hidden"
+    | Здесть настройки
+
+= javascript_include_tag 'home'

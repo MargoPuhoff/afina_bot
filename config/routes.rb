@@ -1,9 +1,11 @@
 Rails.application.routes.draw do
+  devise_for :users
   resources :tg_users
   resources :tg_messages
   resources :tg_chats
 
-  get "up" => "rails/health#show", as: :rails_health_check
+  root 'home#index'
+  get 'logout', to: 'home#logout'
 
   telegram_webhook Telegram::WebhookController
   # post '/webhooks', to: 'webhooks#callback'

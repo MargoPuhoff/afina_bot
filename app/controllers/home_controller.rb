@@ -3,7 +3,7 @@ class HomeController < ApplicationController
   before_action :set_username, only: [:index]
 
   def index
-    @tg_chats = TgChat.all
+    @tg_chats = TgChat.where(tg_type: 'group')
   end
 
   def logout

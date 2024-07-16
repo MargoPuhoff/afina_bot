@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 20_240_713_112_532) do
+ActiveRecord::Schema[7.1].define(version: 2024_07_16_125623) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -19,6 +19,7 @@ ActiveRecord::Schema[7.1].define(version: 20_240_713_112_532) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.boolean "status"
+    t.string "tg_type"
   end
 
   create_table "tg_messages", primary_key: "tg_id", force: :cascade do |t|
@@ -48,4 +49,5 @@ ActiveRecord::Schema[7.1].define(version: 20_240_713_112_532) do
     t.datetime "updated_at", null: false
     t.index ["unlock_token"], name: "index_users_on_unlock_token", unique: true
   end
+
 end

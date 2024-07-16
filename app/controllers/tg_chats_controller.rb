@@ -58,8 +58,18 @@ class TgChatsController < ApplicationController
   def count_tg_message
     chat_id = params[:tg_id]
     count_tg_message = TgMessage.where(tg_chat_id: chat_id).count
-    render plain: count_tg_message.to_s
-    # render json: { count_tg_message: }
+    users = TgUser.joins(:tg_messages)
+                  .where(tg_messages: { tg_chat_id: chat_id })
+                  .select('tg_users.name, COUNT(tg_messages.tg_id) AS message_count')
+                  .group('tg_users.tg_id')
+
+    user_data = users.map do |user|
+      { name: user.name, message_count: user.message_count }
+    end
+
+    respond_to do |format|
+      format.json { render json: { count_tg_message:, users: user_data } }
+    end
   end
 
   private

@@ -4,9 +4,6 @@ class HomeController < ApplicationController
 
   def index
     @tg_chats = TgChat.all
-    @users_with_message_count = TgUser.joins(:tg_messages)
-                                      .select('tg_users.name, COUNT(tg_messages.tg_id) AS messages_count')
-                                      .group('tg_users.tg_id')
   end
 
   def logout

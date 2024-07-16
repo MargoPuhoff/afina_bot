@@ -3,7 +3,7 @@ class HomeController < ApplicationController
   before_action :set_username, only: [:index]
 
   def index
-    @count_tg_message = TgMessage.count
+    @tg_chats = TgChat.all
     @users_with_message_count = TgUser.joins(:tg_messages)
                                       .select('tg_users.name, COUNT(tg_messages.tg_id) AS messages_count')
                                       .group('tg_users.tg_id')

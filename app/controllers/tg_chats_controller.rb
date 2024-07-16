@@ -55,11 +55,18 @@ class TgChatsController < ApplicationController
     end
   end
 
+  def count_tg_message
+    chat_id = params[:tg_id]
+    count_tg_message = TgMessage.where(tg_chat_id: chat_id).count
+    render plain: count_tg_message.to_s
+    # render json: { count_tg_message: }
+  end
+
   private
 
   # Use callbacks to share common setup or constraints between actions.
   def set_tg_chat
-    @tg_chat = TgChat.find(params[:id])
+    @tg_chat = TgChat.find(params[:tg_id])
   end
 
   # Only allow a list of trusted parameters through.

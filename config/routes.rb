@@ -6,6 +6,7 @@ Rails.application.routes.draw do
 
   root 'home#index'
   get 'logout', to: 'home#logout'
+  get 'chats/:tg_id/count_tg_message', to: 'tg_chats#count_tg_message'
 
   telegram_webhook Telegram::WebhookController
   # post '/webhooks', to: 'webhooks#callback'

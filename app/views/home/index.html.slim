@@ -23,10 +23,10 @@ main class="p-2.5	bg-neutral-300"
     label for="option-2" class="cursor-pointer"
       span class="px-14" Настройки
 
-  div id="analytics" class="mx-8 hidden"
+  div id="analytics" class="mx-8 hidden min-h-screen"
     div class="mt-12 p-10 border-2 rounded-2xl border-black bg-white"
       | Этот бот автоматически собирает и анализирует данные о сообщениях в чате с компаниями-клиентами. Он предоставляет администраторам ценную информацию о количестве отправленных сообщений, активности пользователей и другую статистику
-    div class="mt-12 mb-5 border rounded-lg border-black bg-white"
+    div class="mt-12 mb-5 min-h-screen border rounded-lg border-black bg-white"
       h3 class="p-6 text-2xl font-medium" Аналитика
 
       div class="my-12 mx-6"
@@ -35,7 +35,10 @@ main class="p-2.5	bg-neutral-300"
           - @tg_chats.each do |chat|
            = render partial: "select_chats", locals: {chat: chat}
 
-      div class="mt-12 mx-6 mb-6 flex"
+      div class="mx-6 my-12 p-10 flex justify-center items-center text-lg rounded-2xl border-2 border-black" id="no_selection"
+        | Для просмотра информации необходимо выбрать чат
+
+      div class="mt-12 mx-6 mb-6 flex hidden" id="analytic_info"
         div class="mr-12 p-6 w-80 border border-black rounded-lg"
           p class="text-2xl font-bold" Число сообщений
           p class="py-6 text-4xl font-bold text-gray-600" id="count_message"

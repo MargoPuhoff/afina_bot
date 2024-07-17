@@ -5,22 +5,39 @@ document.addEventListener('DOMContentLoaded', function() {
   let analyticInfo = document.getElementById('analytic_info')
   let countTgMessage = document.getElementById('count_message')
   let activeUsers = document.getElementById('active_users')
+  let SelectDate = document.getElementById('select_date')
+  let PartialMonthMessage = document.getElementById('partial_month_message')
 
-  // Обработчик изменения select
-  selectChats.addEventListener('change', function() {
+  function changeAnalytics() {
+    // Получаю значения из option
     let idChat = selectChats.value
+    let period = SelectDate.value
+
     noSelect.classList.add('hidden')
     analyticInfo.classList.remove('hidden')
 
     let request = new XMLHttpRequest();
+    request.open('GET', `/chats/${idChat}/count_tg_message?period=${period}`, true)
 
-    request.open('GET', '/chats/' + idChat + '/count_tg_message', true)
     request.onload = function() {
-
       // Обновляю содержимое div с количеством сообщений и пользователями
       if (request.status >= 200 && request.status < 400) {
         const data = JSON.parse(request.responseText)
-        countTgMessage.textContent = data.count_tg_message
+        console.log(request)
+
+        if (period === 'year_period') {
+          countTgMessage.innerHTML = '';
+          for (const [month, count] of Object.entries(data.count_per_month)) {
+            let monthElement = document.getElementById(`count_${month.toLowerCase()}`);
+            if (monthElement) {
+              monthElement.textContent = count;
+            }
+          }
+          PartialMonthMessage.classList.remove('hidden')
+        } else {
+          PartialMonthMessage.classList.add('hidden')
+          countTgMessage.textContent = data.count_tg_message
+        }
 
         activeUsers.innerHTML = ''
         data.users.forEach(user => {
@@ -36,11 +53,15 @@ document.addEventListener('DOMContentLoaded', function() {
           divUser.appendChild(userName);
           divUser.appendChild(userCount);
         });
+
       } else {
         console.error("Error message count: ", error)
       }
     };
+    request.send();
+  }
 
-    request.send()
-  })
+  // Обработчик изменения select
+  SelectDate.addEventListener('change', changeAnalytics);
+  selectChats.addEventListener('change', changeAnalytics);
 })

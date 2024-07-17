@@ -30,10 +30,17 @@ main class="p-2.5	bg-neutral-300"
       h3 class="p-6 text-2xl font-medium" Аналитика
 
       div class="my-12 mx-6"
-        select class="rounded-lg border-2 border-black bg-white" id="select_chats"
+
+        select class="mr-12 w-80 rounded-lg border-2 border-black bg-white" id="select_chats"
           option disabled="true" selected="true" Выбрать чат
           - @tg_chats.each do |chat|
            = render partial: "select_chats", locals: {chat: chat}
+
+        select class="mr-12 w-80 rounded-lg border-2 border-black bg-white" id="select_date"
+          option disabled="true" selected="true" Выбрать период
+          option value="all_period" Весь период
+          option value="year_period" За год
+          option value="another_period" За период
 
       div class="mx-6 my-12 p-10 flex justify-center items-center text-lg rounded-2xl border-2 border-black" id="no_selection"
         | Для просмотра информации необходимо выбрать чат
@@ -43,6 +50,8 @@ main class="p-2.5	bg-neutral-300"
           p class="text-2xl font-bold" Число сообщений
           p class="py-6 text-4xl font-bold text-gray-600" id="count_message"
             = @count_tg_message
+            = render partial: "month_message"
+
 
         div class="p-6 w-2/5 border border-black rounded-lg"
           p class="text-2xl font-bold" Активные пользователи

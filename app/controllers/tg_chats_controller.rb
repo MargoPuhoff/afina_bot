@@ -57,18 +57,32 @@ class TgChatsController < ApplicationController
 
   def count_tg_message
     chat_id = params[:tg_id]
-    count_tg_message = TgMessage.where(tg_chat_id: chat_id).count
+    period = params[:period]
+    messages = TgMessage.where(tg_chat_id: chat_id)
     users = TgUser.joins(:tg_messages)
                   .where(tg_messages: { tg_chat_id: chat_id })
                   .select('tg_users.name, COUNT(tg_messages.tg_id) AS message_count')
                   .group('tg_users.tg_id')
+    count_per_month = {}
+
+    case period
+    when 'all_period'
+      count_tg_message = messages.count
+    when 'year_period'
+      start_date = Time.now.beginning_of_year
+      end_date = Time.now.end_of_year
+      count_per_month = messages.where(created_at: start_date..end_date).group_by_month(:created_at).count
+      count_per_month = count_per_month.transform_keys { |date| I18n.l(date, format: "%B") }
+    else
+      count_tg_message = messages.count
+    end
 
     user_data = users.map do |user|
       { name: user.name, message_count: user.message_count }
     end
 
     respond_to do |format|
-      format.json { render json: { count_tg_message:, users: user_data } }
+      format.json { render json: { count_tg_message:, users: user_data, count_per_month: } }
     end
   end
 

@@ -2,7 +2,9 @@ class HomeController < ApplicationController
   http_basic_authenticate_with name: "margo", password: "123123", except: [:logout]
   before_action :set_username, only: [:index]
 
-  def index; end
+  def index
+    @tg_chats = TgChat.where(tg_type: 'group')
+  end
 
   def logout
     reset_session

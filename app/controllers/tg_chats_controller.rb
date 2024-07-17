@@ -55,11 +55,55 @@ class TgChatsController < ApplicationController
     end
   end
 
+  def count_tg_message
+    chat_id = params[:tg_id]
+    period = params[:period]
+    exclude_worker = params[:exclude_worker] == 'true'
+
+    messages = TgMessage.where(tg_chat_id: chat_id)
+    messages = messages.joins(:tg_user).where(tg_users: { worker: false }) if exclude_worker
+
+    users = TgUser.joins(:tg_messages)
+                  .where(tg_messages: { tg_chat_id: chat_id })
+    users = users.where(worker: false) if exclude_worker
+    users = users.select('tg_users.name, COUNT(tg_messages.tg_id) AS message_count')
+                 .group('tg_users.tg_id')
+    users = users.distinct
+
+    count_per_month = {}
+
+    case period
+    when 'all_period'
+      count_tg_message = messages.count
+    when 'year_period'
+      start_date = Time.now.beginning_of_year
+      end_date = Time.now.end_of_year
+      count_per_month = messages.where(created_at: start_date..end_date).group_by_month(:created_at).count
+      count_per_month = count_per_month.transform_keys { |date| I18n.l(date, format: "%B") }
+    else
+      count_tg_message = messages.count
+    end
+
+    user_data = users.map do |user|
+      { name: user.name, message_count: user.message_count }
+    end
+
+    respond_to do |format|
+      format.json { render json: { count_tg_message:, users: user_data, count_per_month: } }
+    end
+  rescue StandardError => e
+    logger.error "Error in count_tg_message: #{e.message}"
+    logger.error e.backtrace.join("\n")
+    respond_to do |format|
+      format.json { render json: { error: "Internal Server Error" }, status: :internal_server_error }
+    end
+  end
+
   private
 
   # Use callbacks to share common setup or constraints between actions.
   def set_tg_chat
-    @tg_chat = TgChat.find(params[:id])
+    @tg_chat = TgChat.find(params[:tg_id])
   end
 
   # Only allow a list of trusted parameters through.

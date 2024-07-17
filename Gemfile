@@ -8,6 +8,7 @@ gem 'telegram-bot'
 gem 'rubocop', '~> 1.65', require: false
 gem 'devise'
 gem 'slim-rails'
+gem "groupdate"
 
 # The original asset pipeline for Rails [https://github.com/rails/sprockets-rails]
 gem "sprockets-rails"

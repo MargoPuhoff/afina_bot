@@ -17,6 +17,7 @@ module Telegram
                end
         chat_id.name = name
         chat_id.status = true
+        chat_id.tg_type = chat['type']
         chat_id.save!
 
         respond_with :message, text: "Начинаю считать сообщения"

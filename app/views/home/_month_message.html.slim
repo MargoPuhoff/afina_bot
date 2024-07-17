@@ -1,0 +1,19 @@
+div id="partial_month_message" class="text-lg text-gray-600"
+  - months = { 'January' => 'Январь',
+    'February' => 'Февраль',
+    'March' => 'Март',
+    'April' => 'Апрель',
+    'May' => 'Май',
+    'June' => 'Июнь',
+    'July' => 'Июль',
+    'August' => 'Август',
+    'September' => 'Сентябрь',
+    'October' => 'Октябрь',
+    'November' => 'Ноябрь',
+    'December' => 'Декабрь'}
+
+  .month-messages
+    - months.each do |eng, rus|
+      p class="flex justify-between"
+        span = rus
+        span class="" id="count_#{eng.downcase}" 0

@@ -7,23 +7,25 @@ document.addEventListener('DOMContentLoaded', function() {
   let activeUsers = document.getElementById('active_users')
   let SelectDate = document.getElementById('select_date')
   let PartialMonthMessage = document.getElementById('partial_month_message')
+  let hideWorkerInput = document.getElementById('hide_worker')
 
   function changeAnalytics() {
-    // Получаю значения из option
+    // Получаю значения из option и checkbox
     let idChat = selectChats.value
     let period = SelectDate.value
+    let excludeWorker = hideWorkerInput.checked
 
     noSelect.classList.add('hidden')
     analyticInfo.classList.remove('hidden')
 
     let request = new XMLHttpRequest();
-    request.open('GET', `/chats/${idChat}/count_tg_message?period=${period}`, true)
+    request.open('GET', `/chats/${idChat}/count_tg_message.json?period=${period}&exclude_worker=${excludeWorker}`, true)
 
     request.onload = function() {
       // Обновляю содержимое div с количеством сообщений и пользователями
       if (request.status >= 200 && request.status < 400) {
         const data = JSON.parse(request.responseText)
-        console.log(request)
+        console.log(request.responseURL)
 
         if (period === 'year_period') {
           countTgMessage.innerHTML = '';
@@ -55,7 +57,8 @@ document.addEventListener('DOMContentLoaded', function() {
         });
 
       } else {
-        console.error("Error message count: ", error)
+        console.error("Error message count: ", request.statusText);
+        console.error("Response: ", request.responseText);
       }
     };
     request.send();
@@ -64,4 +67,5 @@ document.addEventListener('DOMContentLoaded', function() {
   // Обработчик изменения select
   SelectDate.addEventListener('change', changeAnalytics);
   selectChats.addEventListener('change', changeAnalytics);
+  hideWorkerInput.addEventListener('change', changeAnalytics);
 })

@@ -58,11 +58,18 @@ class TgChatsController < ApplicationController
   def count_tg_message
     chat_id = params[:tg_id]
     period = params[:period]
+    exclude_worker = params[:exclude_worker] == 'true'
+
     messages = TgMessage.where(tg_chat_id: chat_id)
+    messages = messages.joins(:tg_user).where(tg_users: { worker: false }) if exclude_worker
+
     users = TgUser.joins(:tg_messages)
                   .where(tg_messages: { tg_chat_id: chat_id })
-                  .select('tg_users.name, COUNT(tg_messages.tg_id) AS message_count')
-                  .group('tg_users.tg_id')
+    users = users.where(worker: false) if exclude_worker
+    users = users.select('tg_users.name, COUNT(tg_messages.tg_id) AS message_count')
+                 .group('tg_users.tg_id')
+    users = users.distinct
+
     count_per_month = {}
 
     case period
@@ -83,6 +90,12 @@ class TgChatsController < ApplicationController
 
     respond_to do |format|
       format.json { render json: { count_tg_message:, users: user_data, count_per_month: } }
+    end
+  rescue StandardError => e
+    logger.error "Error in count_tg_message: #{e.message}"
+    logger.error e.backtrace.join("\n")
+    respond_to do |format|
+      format.json { render json: { error: "Internal Server Error" }, status: :internal_server_error }
     end
   end
 

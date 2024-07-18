@@ -15,7 +15,13 @@ class TgUsersController < ApplicationController
   end
 
   # GET /tg_users/1/edit
-  def edit; end
+  def edit
+    @tg_user = TgUser.find(params[:id])
+    respond_to do |format|
+      format.html { render partial: 'form', locals: { tg_user: @tg_user } }
+      # render "home/index", locals: {tg_user: @tg_user}
+    end
+  end
 
   # POST /tg_users or /tg_users.json
   def create
@@ -34,13 +40,17 @@ class TgUsersController < ApplicationController
 
   # PATCH/PUT /tg_users/1 or /tg_users/1.json
   def update
-    respond_to do |format|
-      if @tg_user.update(tg_user_params)
-        format.html { redirect_to tg_user_url(@tg_user), notice: "Tg user was successfully updated." }
-        format.json { render :show, status: :ok, location: @tg_user }
-      else
-        format.html { render :edit, status: :unprocessable_entity }
-        format.json { render json: @tg_user.errors, status: :unprocessable_entity }
+    @tg_user = TgUser.find(params[:id])
+
+    if @tg_user.update(tg_user_params)
+      respond_to do |format|
+        format.html { redirect_to root_path, notice: 'User updated successfully.' }
+        format.js
+      end
+    else
+      respond_to do |format|
+        format.html { render :edit }
+        format.js { render partial: 'form', locals: { tg_user: @tg_user } }
       end
     end
   end
@@ -64,6 +74,7 @@ class TgUsersController < ApplicationController
 
   # Only allow a list of trusted parameters through.
   def tg_user_params
-    params.fetch(:tg_user, {})
+    #params.fetch(:tg_user, {})
+    params.require(:tg_user).permit(:name, :position, :tg_name)
   end
 end

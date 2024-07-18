@@ -1,0 +1,7 @@
+tr class="border border-gray-200"
+  td class="py-2.5 px-4"
+    = tg_chat.name
+  td
+    = tg_chat.tg_id
+  td
+    input type="checkbox" id="change_status_#{tg_chat.tg_id}" data-id="#{tg_chat.tg_id}" checked=(tg_chat.status ? true : false)

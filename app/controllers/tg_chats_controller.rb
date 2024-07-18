@@ -99,6 +99,15 @@ class TgChatsController < ApplicationController
     end
   end
 
+  def change_status
+    @tg_chat = TgChat.find(params[:id])
+    @tg_chat.update(status: params[:status])
+
+    respond_to do |format|
+      format.json { render json: { status: @tg_chat.status } }
+    end
+  end
+
   private
 
   # Use callbacks to share common setup or constraints between actions.

@@ -61,7 +61,22 @@ main class="p-2.5	bg-neutral-300"
           div class="my-6" id="active_users"
 
   div id="settings" class="hidden"
-    | Здесть настройки
+    div class="my-14 mx-8"
+      p class="text-2xl font-bold" Чаты
+
+      table class="mt-6 w-3/5 text-left bg-white"
+        thead class="bg-gray-100"
+          tr class="text-sm uppercase font-normal"
+            th class="py-2.5 px-4" Чат
+            th Id в Телеграм
+            th
+        tbody
+          - @tg_chats.each do |tg_chat|
+            = render partial: "tg_chats/tg_chat", locals: {tg_chat: tg_chat}
+
+    div class="my-14 mx-8 text-2xl font-bold" Сотрудники
+    div class="my-14 mx-8 text-2xl font-bold" Команды
 
 = javascript_include_tag 'home'
 = javascript_include_tag "count_message"
+= javascript_include_tag "count_chats"

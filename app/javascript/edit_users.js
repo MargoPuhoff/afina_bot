@@ -1,4 +1,4 @@
-document.addEventListener('DOMContentLoaded', function() {
+document.addEventListener('turbo:load', function() {
   let modal = document.getElementById('editModal')
   let closeModal = document.getElementById('closeModal')
 

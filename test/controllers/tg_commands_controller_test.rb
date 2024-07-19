@@ -17,7 +17,7 @@ class TgCommandsControllerTest < ActionDispatch::IntegrationTest
 
   test "should create tg_command" do
     assert_difference("TgCommand.count") do
-      post tg_commands_url, params: { tg_command: {  } }
+      post tg_commands_url, params: { tg_command: {} }
     end
 
     assert_redirected_to tg_command_url(TgCommand.last)
@@ -34,7 +34,7 @@ class TgCommandsControllerTest < ActionDispatch::IntegrationTest
   end
 
   test "should update tg_command" do
-    patch tg_command_url(@tg_command), params: { tg_command: {  } }
+    patch tg_command_url(@tg_command), params: { tg_command: {} }
     assert_redirected_to tg_command_url(@tg_command)
   end
 

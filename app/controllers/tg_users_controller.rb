@@ -32,15 +32,15 @@ class TgUsersController < ApplicationController
     # else
     #   puts 'Пользователя нет в базе'
     # end
-    if @tg_user
-      respond_to do |format|
-        if @tg_user.update(tg_user_params.merge(worker: true))
-          format.html { redirect_to root_path, notice: "Tg command was successfully created." }
-          format.json { render :show, status: :created, location: @tg_user }
-        else
-          format.html { render :new, status: :unprocessable_entity }
-          format.json { render json: @tg_user.errors, status: :unprocessable_entity }
-        end
+    return unless @tg_user
+
+    respond_to do |format|
+      if @tg_user.update(tg_user_params.merge(worker: true))
+        format.html { redirect_to root_path, notice: "Tg command was successfully created." }
+        format.json { render :show, status: :created, location: @tg_user }
+      else
+        format.html { render :new, status: :unprocessable_entity }
+        format.json { render json: @tg_user.errors, status: :unprocessable_entity }
       end
     end
   end
@@ -83,7 +83,7 @@ class TgUsersController < ApplicationController
 
   # Only allow a list of trusted parameters through.
   def tg_user_params
-    #params.fetch(:tg_user, {})
+    # params.fetch(:tg_user, {})
     params.require(:tg_user).permit(:name, :position, :tg_name)
   end
 end

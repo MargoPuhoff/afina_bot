@@ -1,4 +1,4 @@
-document.addEventListener('DOMContentLoaded', function() {
+document.addEventListener('turbo:load', function() {
   document.querySelectorAll('input[type="checkbox"][id^="change_status_"]').forEach(function(checkbox) {
     checkbox.addEventListener('change', function() {
       let tgChatId = this.dataset.id

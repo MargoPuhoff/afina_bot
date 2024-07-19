@@ -1,4 +1,4 @@
-document.addEventListener('DOMContentLoaded', function() {
+document.addEventListener('turbo:load', function() {
   // Получаю элементы со страницы
   let selectChats = document.getElementById('select_chats')
   let noSelect = document.getElementById('no_selection')

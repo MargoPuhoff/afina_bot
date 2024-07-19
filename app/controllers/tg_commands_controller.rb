@@ -1,5 +1,5 @@
 class TgCommandsController < ApplicationController
-  before_action :set_tg_command, only: %i[ show edit update destroy ]
+  before_action :set_tg_command, only: %i[show edit update destroy]
 
   # GET /tg_commands or /tg_commands.json
   def index
@@ -7,8 +7,7 @@ class TgCommandsController < ApplicationController
   end
 
   # GET /tg_commands/1 or /tg_commands/1.json
-  def show
-  end
+  def show; end
 
   # GET /tg_commands/new
   def new
@@ -16,8 +15,7 @@ class TgCommandsController < ApplicationController
   end
 
   # GET /tg_commands/1/edit
-  def edit
-  end
+  def edit; end
 
   # POST /tg_commands or /tg_commands.json
   def create
@@ -55,14 +53,15 @@ class TgCommandsController < ApplicationController
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_tg_command
-      @tg_command = TgCommand.find(params[:id])
-    end
 
-    # Only allow a list of trusted parameters through.
-    def tg_command_params
-      # params.fetch(:tg_command, {})
-      params.require(:tg_command).permit(:name, :description)
-    end
+  # Use callbacks to share common setup or constraints between actions.
+  def set_tg_command
+    @tg_command = TgCommand.find(params[:id])
+  end
+
+  # Only allow a list of trusted parameters through.
+  def tg_command_params
+    # params.fetch(:tg_command, {})
+    params.require(:tg_command).permit(:name, :description)
+  end
 end

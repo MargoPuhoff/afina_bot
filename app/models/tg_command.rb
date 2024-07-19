@@ -1,0 +1,2 @@
+class TgCommand < ApplicationRecord
+end

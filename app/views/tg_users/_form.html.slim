@@ -1,0 +1,10 @@
+= form_with model: tg_user, remote: true do |f|
+  div class="py-4"
+    = f.text_field :name, placeholder: "Фамилия и имя", class: "w-full py-2 px-4 block rounded-lg border-2 border-black"
+  div class="py-4"
+    = f.text_field :position, placeholder: "Должность", class: "w-full py-2 px-4 block rounded-lg border-2 border-black"
+  div class="py-4"
+    = f.text_field :tg_name, placeholder: "Логин в Телеграм", class: "w-full py-2 px-4 block rounded-lg border-2 border-black"
+  div class="flex"
+    = link_to "Отменить", root_path, class: "mr-2 py-2 px-4 rounded-lg border-2 border-black bg-white"
+    = f.submit "Добавить", class: "py-2 px-4 text-white cursor-pointer rounded-lg border-2 border-black bg-black"

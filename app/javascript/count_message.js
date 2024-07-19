@@ -1,4 +1,4 @@
-document.addEventListener('DOMContentLoaded', function() {
+document.addEventListener('turbo:load', function() {
   // Получаю элементы со страницы
   let selectChats = document.getElementById('select_chats')
   let noSelect = document.getElementById('no_selection')
@@ -29,8 +29,10 @@ document.addEventListener('DOMContentLoaded', function() {
 
         if (period === 'year_period') {
           countTgMessage.innerHTML = '';
+          console.log(data.count_per_month)
           for (const [month, count] of Object.entries(data.count_per_month)) {
             let monthElement = document.getElementById(`count_${month.toLowerCase()}`);
+            console.log(monthElement)
             if (monthElement) {
               monthElement.textContent = count;
             }

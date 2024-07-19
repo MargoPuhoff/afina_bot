@@ -1,8 +1,14 @@
 Rails.application.routes.draw do
+  resources :tg_commands
   devise_for :users
   resources :tg_users
   resources :tg_messages
-  resources :tg_chats
+
+  resources :tg_chats, only: [] do
+    member do
+      patch :change_status
+    end
+  end
 
   root 'home#index'
   get 'logout', to: 'home#logout'

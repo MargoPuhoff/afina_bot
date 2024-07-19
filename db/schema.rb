@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 20_240_716_125_623) do
+ActiveRecord::Schema[7.1].define(version: 20_240_719_061_111) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -20,6 +20,13 @@ ActiveRecord::Schema[7.1].define(version: 20_240_716_125_623) do
     t.datetime "updated_at", null: false
     t.boolean "status"
     t.string "tg_type"
+  end
+
+  create_table "tg_commands", force: :cascade do |t|
+    t.string "name"
+    t.string "description"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "tg_messages", primary_key: "tg_id", force: :cascade do |t|
@@ -35,6 +42,7 @@ ActiveRecord::Schema[7.1].define(version: 20_240_716_125_623) do
     t.boolean "worker", default: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "position"
   end
 
   create_table "users", force: :cascade do |t|

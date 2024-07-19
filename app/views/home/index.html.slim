@@ -61,7 +61,48 @@ main class="p-2.5	bg-neutral-300"
           div class="my-6" id="active_users"
 
   div id="settings" class="hidden"
-    | Здесть настройки
+    div class="my-14 mx-8"
+      p class="text-2xl font-bold" Чаты
+
+      table class="mt-6 w-3/5 text-left bg-white"
+        thead class="bg-gray-100"
+          tr class="text-sm uppercase font-normal"
+            th class="py-2.5 px-4" Чат
+            th Id в Телеграм
+            th
+        tbody
+          - @tg_chats.each do |tg_chat|
+            = render partial: "tg_chats/tg_chat", locals: {tg_chat: tg_chat}
+
+    div class="my-14 mx-8"
+      p class="text-2xl font-bold" Сотрудники
+
+      table class="mt-6 w-3/4 text-left bg-white"
+        thead class="bg-gray-100"
+          tr class="text-sm uppercase font-normal"
+            th class="py-2.5 px-4" Фамилия и имя
+            th Должность
+            th Логин вТелеграм
+            th
+            th
+        tbody
+          - @tg_worker.each do |tg_worker|
+            = render partial: "tg_users/tg_user", locals: {tg_worker: tg_worker}
+
+    = link_to "Добавить", new_tg_user_path, class: "my-6 mx-8 py-2 px-4 text-white cursor-pointer rounded-lg border-2 border-black bg-black"
+
+    div class="my-14 mx-8"
+      p class="text-2xl font-bold" Команды
+
+      table class="mt-6 w-3/4 text-left bg-white"
+        tbody
+          - @tg_command.each do |tg_command|
+            = render partial: "tg_commands/tg_command", locals: {tg_command: tg_command}
+
+    = link_to "Добавить", new_tg_command_path, class: "my-6 mx-8 py-2 px-4 text-white cursor-pointer rounded-lg border-2 border-black bg-black"
+
 
 = javascript_include_tag 'home'
 = javascript_include_tag "count_message"
+= javascript_include_tag "count_chats"
+/ = javascript_include_tag "edit_users"

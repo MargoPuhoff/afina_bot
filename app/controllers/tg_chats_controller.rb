@@ -79,7 +79,7 @@ class TgChatsController < ApplicationController
       start_date = Time.now.beginning_of_year
       end_date = Time.now.end_of_year
       count_per_month = messages.where(created_at: start_date..end_date).group_by_month(:created_at).count
-      count_per_month = count_per_month.transform_keys { |date| I18n.l(date, format: "%B") }
+      count_per_month = count_per_month.transform_keys { |date| I18n.l(date, locale: :ru, format: "%B") }
     else
       count_tg_message = messages.count
     end

@@ -1,0 +1,10 @@
+= form_with(model: tg_command) do |form|
+  - if tg_command.errors.any?
+    div style="color: red"
+      h2 = "#{pluralize(tg_command.errors.count, "error")} prohibited this tg_command from being saved:"
+      ul
+        - tg_command.errors.each do |error|
+          li = error.full_message
+
+  div
+    = form.submit

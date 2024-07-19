@@ -1,6 +1,7 @@
 Rails.application.routes.draw do
+  resources :tg_commands
   devise_for :users
-  resources :tg_users, only: [:edit, :update]
+  resources :tg_users
   resources :tg_messages
 
   resources :tg_chats, only: [] do

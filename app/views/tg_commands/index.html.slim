@@ -1,0 +1,11 @@
+p style="color: green" = notice
+
+h1 Tg commands
+
+#tg_commands
+  - @tg_commands.each do |tg_command|
+    == render tg_command
+    p
+      = link_to "Show this tg command", tg_command
+
+= link_to "New tg command", new_tg_command_path

@@ -15,13 +15,7 @@ class TgUsersController < ApplicationController
   end
 
   # GET /tg_users/1/edit
-  def edit
-    # @tg_user = TgUser.find(params[:id])
-    # respond_to do |format|
-    #   format.html { render partial: 'form', locals: { tg_user: @tg_user } }
-    #   render "home/index", locals: {tg_user: @tg_user}
-    # end
-  end
+  def edit; end
 
   # POST /tg_users or /tg_users.json
   def create

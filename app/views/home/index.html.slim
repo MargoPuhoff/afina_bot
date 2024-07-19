@@ -91,11 +91,6 @@ main class="p-2.5	bg-neutral-300"
 
     = link_to "Добавить", new_tg_user_path, class: "my-6 mx-8 py-2 px-4 text-white cursor-pointer rounded-lg border-2 border-black bg-black"
 
-    / div id="editModal" class="hidden fixed inset-0 bg-gray-500 bg-opacity-75 flex items-center justify-center z-50"
-    /   div class="bg-white p-6 rounded shadow-lg w-1/3"
-    /     h2 class="text-xl mb-4" Редактировать сотрудника
-    /     = render partial: 'tg_users/form', locals: { tg_user: @tg_worker}
-
     div class="my-14 mx-8"
       p class="text-2xl font-bold" Команды
 
@@ -110,4 +105,4 @@ main class="p-2.5	bg-neutral-300"
 = javascript_include_tag 'home'
 = javascript_include_tag "count_message"
 = javascript_include_tag "count_chats"
-= javascript_include_tag "edit_users"
+/ = javascript_include_tag "edit_users"

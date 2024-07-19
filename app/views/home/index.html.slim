@@ -89,7 +89,7 @@ main class="p-2.5	bg-neutral-300"
           - @tg_worker.each do |tg_worker|
             = render partial: "tg_users/tg_user", locals: {tg_worker: tg_worker}
 
-    = link_to "Добавить", new_tg_user_path(@tg_worker), class: "my-6 mx-8 py-2 px-4 text-white cursor-pointer rounded-lg border-2 border-black bg-black"
+    = link_to "Добавить", new_tg_user_path, class: "my-6 mx-8 py-2 px-4 text-white cursor-pointer rounded-lg border-2 border-black bg-black"
 
     / div id="editModal" class="hidden fixed inset-0 bg-gray-500 bg-opacity-75 flex items-center justify-center z-50"
     /   div class="bg-white p-6 rounded shadow-lg w-1/3"
@@ -104,7 +104,7 @@ main class="p-2.5	bg-neutral-300"
           - @tg_command.each do |tg_command|
             = render partial: "tg_commands/tg_command", locals: {tg_command: tg_command}
 
-    = link_to "Добавить", new_tg_command_path(@tg_command), class: "my-6 mx-8 py-2 px-4 text-white cursor-pointer rounded-lg border-2 border-black bg-black"
+    = link_to "Добавить", new_tg_command_path, class: "my-6 mx-8 py-2 px-4 text-white cursor-pointer rounded-lg border-2 border-black bg-black"
 
 
 = javascript_include_tag 'home'

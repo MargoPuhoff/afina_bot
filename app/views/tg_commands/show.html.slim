@@ -2,9 +2,4 @@ p style="color: green" = notice
 
 == render @tg_command
 
-div
-  => link_to "Edit this tg command", edit_tg_command_path(@tg_command)
-  '|
-  =< link_to "Back to tg commands", tg_commands_path
-
   = button_to "Destroy this tg command", @tg_command, method: :delete

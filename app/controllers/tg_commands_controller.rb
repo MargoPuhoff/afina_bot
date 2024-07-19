@@ -25,7 +25,7 @@ class TgCommandsController < ApplicationController
 
     respond_to do |format|
       if @tg_command.save
-        format.html { redirect_to tg_command_url(@tg_command), notice: "Tg command was successfully created." }
+        format.html { redirect_to root_path, notice: "Tg command was successfully created." }
         format.json { render :show, status: :created, location: @tg_command }
       else
         format.html { render :new, status: :unprocessable_entity }

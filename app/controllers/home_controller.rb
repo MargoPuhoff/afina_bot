@@ -5,6 +5,7 @@ class HomeController < ApplicationController
   def index
     @tg_chats = TgChat.where(tg_type: 'group')
     @tg_worker = TgUser.where(worker: true)
+    @tg_command = TgCommand.all
   end
 
   def logout

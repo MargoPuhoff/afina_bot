@@ -1,1 +1,9 @@
-div id="#{dom_id tg_command}"
+tr class="border border-gray-200"
+  td class="py-2.5 px-4"
+    = tg_command.name
+  td
+    = tg_command.description
+  td class="py-2.5 px-4 cursor-pointer"
+    = link_to image_tag("edit.svg"), edit_tg_command_path(tg_command), remote: true, class: 'edit-link'
+  td class="py-2.5 px-4 cursor-pointer"
+    = image_tag "trash-2.svg"

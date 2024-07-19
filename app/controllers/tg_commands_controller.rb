@@ -38,7 +38,7 @@ class TgCommandsController < ApplicationController
   def update
     respond_to do |format|
       if @tg_command.update(tg_command_params)
-        format.html { redirect_to tg_command_url(@tg_command), notice: "Tg command was successfully updated." }
+        format.html { redirect_to root_path, notice: "Tg command was successfully updated." }
         format.json { render :show, status: :ok, location: @tg_command }
       else
         format.html { render :edit, status: :unprocessable_entity }
@@ -65,6 +65,7 @@ class TgCommandsController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def tg_command_params
-      params.fetch(:tg_command, {})
+      # params.fetch(:tg_command, {})
+      params.require(:tg_command).permit(:name, :description)
     end
 end

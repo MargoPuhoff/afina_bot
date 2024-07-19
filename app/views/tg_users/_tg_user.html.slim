@@ -8,4 +8,4 @@ tr class="border border-gray-200"
   td class="py-2.5 px-4 cursor-pointer"
     = link_to image_tag("edit.svg"), edit_tg_user_path(tg_worker), remote: true, class: 'edit-link'
   td class="py-2.5 px-4 cursor-pointer"
-    = image_tag "trash-2.svg"
+    = button_to image_tag("trash-2.svg"), tg_worker, method: :delete

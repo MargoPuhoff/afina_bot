@@ -52,7 +52,7 @@ class TgCommandsController < ApplicationController
     @tg_command.destroy!
 
     respond_to do |format|
-      format.html { redirect_to tg_commands_url, notice: "Tg command was successfully destroyed." }
+      format.html { redirect_to root_path, notice: "Tg command was successfully destroyed." }
       format.json { head :no_content }
     end
   end

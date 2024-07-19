@@ -25,15 +25,28 @@ class TgUsersController < ApplicationController
 
   # POST /tg_users or /tg_users.json
   def create
-    @tg_user = TgUser.new(tg_user_params)
+    @tg_user = TgUser.find_by(tg_name: tg_user_params[:tg_name])
 
-    respond_to do |format|
-      if @tg_user.save
-        format.html { redirect_to tg_user_url(@tg_user), notice: "Tg user was successfully created." }
-        format.json { render :show, status: :created, location: @tg_user }
-      else
-        format.html { render :new, status: :unprocessable_entity }
-        format.json { render json: @tg_user.errors, status: :unprocessable_entity }
+    # if @tg_user
+    #   if @tg_user.update(tg_user_params.merge(worker: true))
+    #     respond_to do |format|
+    #       format.json { redirect_to root_path, status: :ok }
+    #     end
+    #   else
+    #     render json: @tg_user.errors, status: :unprocessable_entity
+    #   end
+    # else
+    #   puts 'Пользователя нет в базе'
+    # end
+    if @tg_user
+      respond_to do |format|
+        if @tg_user.update(tg_user_params.merge(worker: true))
+          format.html { redirect_to root_path, notice: "Tg command was successfully created." }
+          format.json { render :show, status: :created, location: @tg_user }
+        else
+          format.html { render :new, status: :unprocessable_entity }
+          format.json { render json: @tg_user.errors, status: :unprocessable_entity }
+        end
       end
     end
   end
@@ -57,11 +70,13 @@ class TgUsersController < ApplicationController
 
   # DELETE /tg_users/1 or /tg_users/1.json
   def destroy
-    @tg_user.destroy!
-
-    respond_to do |format|
-      format.html { redirect_to tg_users_url, notice: "Tg user was successfully destroyed." }
-      format.json { head :no_content }
+    if @tg_user.update(worker: false)
+      respond_to do |format|
+      end
+    else
+      respond_to do |format|
+        format.json { render json: { success: false, errors: @tg_user.errors }, status: :unprocessable_entity }
+      end
     end
   end
 

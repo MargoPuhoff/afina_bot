@@ -42,6 +42,10 @@ main class="p-2.5	bg-neutral-300"
           option value="year_period" За год
           option value="another_period" За период
 
+        div id="custom_date_range" class="hidden"
+          input type="date" id="start_date" class="mr-4 border-2 border-black rounded-lg"
+          input type="date" id="end_date" class="border-2 border-black rounded-lg"
+
         input type="checkbox" id="hide_worker"
           label for="hide_worker" Учитывать сотрудников компании
 
@@ -105,4 +109,3 @@ main class="p-2.5	bg-neutral-300"
 = javascript_include_tag 'home'
 = javascript_include_tag "count_message"
 = javascript_include_tag "count_chats"
-/ = javascript_include_tag "edit_users"

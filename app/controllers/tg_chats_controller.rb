@@ -59,6 +59,8 @@ class TgChatsController < ApplicationController
     chat_id = params[:tg_id]
     period = params[:period]
     exclude_worker = params[:exclude_worker] == 'true'
+    start_date = params[:start_date]
+    end_date = params[:end_date]
 
     messages = TgMessage.where(tg_chat_id: chat_id)
     messages = messages.joins(:tg_user).where(tg_users: { worker: false }) if exclude_worker
@@ -80,6 +82,15 @@ class TgChatsController < ApplicationController
       end_date = Time.now.end_of_year
       count_per_month = messages.where(created_at: start_date..end_date).group_by_month(:created_at).count
       count_per_month = count_per_month.transform_keys { |date| I18n.l(date, locale: :ru, format: "%B") }
+    when 'another_period'
+      if start_date.present? && end_date.present?
+        start_date = Date.parse(start_date).beginning_of_day
+        end_date = Date.parse(end_date).end_of_day
+        count_tg_message = messages.where(created_at: start_date..end_date).count
+        users = users.where(tg_messages: { created_at: start_date..end_date })
+      else
+        count_tg_message = messages.count
+      end
     else
       count_tg_message = messages.count
     end

@@ -2,9 +2,7 @@ module Telegram
   class WebhookController < Telegram::Bot::UpdatesController
     def check_admin?
       tg_id = from['id'].to_s
-      admin = '232193762'
-
-      true if tg_id == admin
+      User.exists?(tg_user_id: tg_id)
     end
 
     def start!(*)
